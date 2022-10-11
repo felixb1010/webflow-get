@@ -1,7 +1,7 @@
 const core = require('@actions/core')
 const YAML = require('yaml')
 const picomatch = require('picomatch')
-const fetch = require('node-fetch')
+const fetch = require('./fetch.js')
 const prettier = require('prettier')
 const fs = require('fs').promises
 
@@ -14,9 +14,7 @@ const CSS_REGEX = new RegExp(`<link href="(${CSS_PATTERN})".*\\/>`)
 const CSS_REPLACE_REGEX = new RegExp(`(?<=<link href=")(${CSS_PATTERN})(?=".*\\/>)`)
 
 
-fetch.use((req) => {
-  req.headers.set('Mozilla/5.0', '(Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.2 Safari/605.1.15')
-});
+
 
 class RetryError extends Error {
   constructor () {
